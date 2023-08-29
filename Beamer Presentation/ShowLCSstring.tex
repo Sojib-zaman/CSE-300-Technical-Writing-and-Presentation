@@ -1,0 +1,70 @@
+
+
+\begin{frame}{Find LCS String}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\SetKwFunction{LCS}{LCS-Genarate-String}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\LCS{X[1…m], Y[1…n]}}{
+
+\setbeamercolor{block title}{bg=blue!20}
+\setbeamercolor{block body}{bg=cyan!10}
+\only<1>
+{
+
+
+
+
+
+\begin{block}{Initialization}
+
+\For{i $\leftarrow$ 0 to m}{
+$L[i][0] \leftarrow 0$ \tcc*{Initialization}
+}
+
+\For{j $\leftarrow$ 0 to n}{
+$L[0][j] \leftarrow 0$ \tcc*{Initialization}
+}
+\end{block}
+}
+
+
+\only<2>
+{
+{\fontsize{6pt}{6pt}\selectfont
+\begin{block}{Matching Characters}
+\For{i $\leftarrow$ 1 to m}{
+\For{j $\leftarrow$ 1 to n}{
+\tcc{If current characters match, add 1 to LCS}
+\If{X[i] = Y[j]}{
+$L[i][j] \leftarrow L[i-1][j-1] + 1$ \\
+$D[i][j] = 1 ;$
+}
+\Else{
+\tcc{If they don't match, take the maximum of the LCS}
+\If{L[i-1][j] $\geq$ L[i][j-1]}{
+$L[i][j] \leftarrow L[i-1][j]$ \\
+$D[i][j] = 2$ ;
+}
+\Else{
+$L[i][j] \leftarrow L[i][j-1]$ \\
+$D[i][j] = 3$ ;
+}
+}
+}
+}
+
+\end{block}
+
+}
+}
+}
+
+
+
+
+
+
+\end{algorithm}
+\end{frame}

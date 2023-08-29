@@ -1,0 +1,77 @@
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{graphicx}
+\usepackage{animate}
+\usepackage{subfigure}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{adjustbox}
+\usepackage{minted}
+\usepackage{subfiles}
+\usepackage{FiraSans}
+\usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor 
+\usepackage{listings}
+\usepackage{xspace}
+\usepackage{multicol}
+%THEME and COLORTHEME
+\usetheme{metropolis}
+% \usepackage{unicode-math}
+\usepackage{caption}
+% \usepackage[mathrm=sym]{unicode-math}
+
+\graphicspath{ {./Assets/} }
+
+
+
+
+\title{Longest Common Subsequence}
+\author{1905066 - Abir Muhtasim\\1905067-MD. Roqunuzzaman Sojib\\1905090 - Tanvir Saad}
+\institute{Bangladesh University of Enginnering and Technology}
+\date{\today}
+
+
+\tikzstyle{dp_table_arrow} = [thick,->,>=stealth]
+\tikzstyle{dp_select_circle} = [fill = orange!50, draw = none]
+\tikzstyle{dp_match_circle} = [fill = green!50, draw = none]
+
+
+\tikzstyle{dp_no_match_rect} = [fill = yellow!60 , draw = none]
+\tikzstyle{dp_match_rect} = [fill = lime!90 , draw = none]
+
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+
+\section{What is LCS}
+\input{intro1}
+\input{example}
+\input{Approach}
+
+ \section{Recursive Formulation}
+ \input{Recursive1}
+
+\section{Using Dynamic Programming}
+\input{DP1}
+\input{DP5}
+\input{DP2}
+\input{DP6}
+
+
+\input{ShowLCSstring}
+\begin{frame}[label=conclusion, standout]
+    \begin{center}
+    \Huge THANK YOU
+    \end{center}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,235 @@
+\begin{frame}{Dynamic Programming}
+
+\newcommand*{\xMin}{3}%
+\newcommand*{\xMax}{10}%
+\newcommand*{\yMin}{3}%
+\newcommand*{\yMax}{11}%
+
+
+
+\begin{columns}
+
+
+\column{0.7\textwidth}
+    \begin{center}
+
+
+\begin{adjustbox}{max totalsize={0.95\textwidth}{0.8\textheight}}
+\begin{tikzpicture}
+
+    \foreach \i in {\xMin,...,\xMax} {
+        \draw [very thin,brown] (\i,\yMin) -- (\i,\yMax);
+    }
+    \foreach \i in {\yMin,...,\yMax} {
+        \draw [very thin,brown] (\xMin,\i) -- (\xMax,\i);
+    }
+
+    
+    \foreach \i in {0,...,6} {
+        \node at (3 + \i + 0.5, \yMax + 1.5) {\Large $\i$};
+        \node at (3+\i + 0.6, \yMax - 0.6) {{\onslide<2->{\Large $0$}}};
+    }
+
+    \foreach \i in {0,...,7} {
+        \node at (\xMin - 1.5, 3 + 7 - \i + 0.5) {\Large $\i$};
+        \node at (\xMin + 0.6, 4+\i - 0.6) {{\onslide<2->{\Large $0$}}};
+    }
+
+    % row selection
+    \onslide<3-14>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 1 + 0.5) circle (0.35);}
+    \onslide<19-20>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 2 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 3 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 4 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 5+ 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 6 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_select_circle] (\xMin - 0.5, 3 + 7 - 7 + 0.5) circle (0.35);}
+
+    % row match
+    \onslide<9-10,13-14>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 1 + 0.5) circle (0.35);}
+    \onslide<15-18>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 2 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 3 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 4 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 5+ 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 6 + 0.5) circle (0.35);}
+    % \onslide<2>{\draw[dp_match_circle] (\xMin - 0.5, 3 + 7 - 7 + 0.5) circle (0.35);}
+
+
+    %column select
+    \onslide<3-4>{\draw[dp_select_circle] (3 + 1 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<5-6>{\draw[dp_select_circle] (3 + 2 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<7-8>{\draw[dp_select_circle] (3 + 3 + 0.5, \yMax + 0.5) circle (0.35);}
+    %\onslide<2>{\draw[dp_select_circle] (3 + 4 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<11-12>{\draw[dp_select_circle] (3 + 5 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<19,20>{\draw[dp_select_circle] (3 + 6 + 0.5, \yMax + 0.5) circle (0.35);}
+
+    %column match
+    \onslide<15-16>{\draw[dp_match_circle] (3 + 1 + 0.5, \yMax + 0.5) circle (0.35);}
+    %\onslide<2>{\draw[dp_match_circle] (3 + 2 + 0.5, \yMax + 0.5) circle (0.35);}
+    %\onslide<2>{\draw[dp_match_circle] (3 + 3 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<9-10>{\draw[dp_match_circle] (3 + 4 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<17-18>{\draw[dp_match_circle] (3 + 5 + 0.5, \yMax + 0.5) circle (0.35);}
+    \onslide<13-14>{\draw[dp_match_circle] (3 + 6 + 0.5, \yMax + 0.5) circle (0.35);}
+
+    
+
+    \node at (3 + 0 + 0.5, \yMax + 0.5) {\Large $y_j$};
+    \node at (3 + 1 + 0.5, \yMax + 0.5) {\Large $B$};
+    \node at (3 + 2 + 0.5, \yMax + 0.5) {\Large $D$};
+    \node at (3 + 3 + 0.5, \yMax + 0.5) {\Large $C$};
+    \node at (3 + 4 + 0.5, \yMax + 0.5) {\Large $A$};
+    \node at (3 + 5 + 0.5, \yMax + 0.5) {\Large $B$};
+    \node at (3 + 6 + 0.5, \yMax + 0.5) {\Large $A$};
+
+    \node at (\xMin - 0.5, 3 + 7 - 0 + 0.5) {\Large $x_i$};
+    \node at (\xMin - 0.5, 3 + 7 - 1 + 0.5) {\Large $A$};
+    \node at (\xMin - 0.5, 3 + 7 - 2 + 0.5) {\Large $B$};
+    \node at (\xMin - 0.5, 3 + 7 - 3 + 0.5) {\Large $C$};
+    \node at (\xMin - 0.5, 3 + 7 - 4 + 0.5) {\Large $B$};
+    \node at (\xMin - 0.5, 3 + 7 - 5 + 0.5) {\Large $D$};
+    \node at (\xMin - 0.5, 3 + 7 - 6 + 0.5) {\Large $A$};
+    \node at (\xMin - 0.5, 3 + 7 - 7 + 0.5) {\Large $B$};
+    
+
+    % row 1
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 6) {{\onslide<4->{\Large $0$}}}; %11
+    \onslide<4->{\draw[dp_table_arrow] (\xMin + 0.2 + 1, 4 - 0.3 + 6) -- (\xMin + 0.2 + 1, 4 - 0.5 + 7);} % vertical
+    
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 6) {{\onslide<6->{\Large $0$}}}; %12
+    \onslide<6->{\draw[dp_table_arrow] (\xMin + 0.2 + 2, 4 - 0.3 + 6) -- (\xMin + 0.2 + 2, 4 - 0.5 + 7);}
+    
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 6) {{\onslide<8->{\Large $0$}}}; %13
+    \onslide<8->{\draw[dp_table_arrow] (\xMin + 0.2 + 3, 4 - 0.3 + 6) -- (\xMin + 0.2 + 3, 4 - 0.5 + 7);}
+    
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 6) {{\onslide<10->{\Large $1$}}}; %14
+    \onslide<10->{\draw[dp_table_arrow] (\xMin + 0.3 + 4, 4 - 0.4 + 6) -- (\xMin - 0.2 + 4, 4 - 0.6 + 7);} % angle
+    
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 6) {{\onslide<11->{\Large $1$}}}; %15
+    \onslide<11->{\draw[dp_table_arrow] (\xMin + 0.3 + 5, 4 - 0.3 + 6) -- (\xMin - 0.3 + 5, 4 - 0.3 + 6);} % horizontal
+    
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 6) {{\onslide<13->{\Large $1$}}}; %16
+    \onslide<13->{\draw[dp_table_arrow] (\xMin + 0.3 + 6, 4 - 0.4 + 6) -- (\xMin - 0.2 + 6, 4 - 0.6 + 7);} % angle
+
+
+
+
+    % row 2
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 5) {{\onslide<15->{\Large $1$}}}; %21
+    \onslide<15->{\draw[dp_table_arrow] (\xMin + 0.3 + 1, 4 - 0.4 + 5) -- (\xMin - 0.2 + 1, 4 - 0.6 + 6);} % angle
+    
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 5) {{\onslide<17->{\Large $1$}}}; %22
+    \onslide<17->{\draw[dp_table_arrow] (\xMin + 0.3 + 2, 4 - 0.3 + 5) -- (\xMin - 0.3 + 2, 4 - 0.3 + 5);} % horizontal
+    
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 5) {{\onslide<17->{\Large $1$}}}; %23
+    \onslide<17->{\draw[dp_table_arrow] (\xMin + 0.3 + 3, 4 - 0.3 + 5) -- (\xMin - 0.3 + 3, 4 - 0.3 + 5);} % horizontal
+    
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 5) {{\onslide<17->{\Large $1$}}}; %24
+    \onslide<17->{\draw[dp_table_arrow] (\xMin + 0.2 + 4, 4 - 0.3 + 5) -- (\xMin + 0.2 + 4, 4 - 0.5 + 6);} % vertical
+    
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 5) {{\onslide<17->{\Large $2$}}}; %25
+    \onslide<17->{\draw[dp_table_arrow] (\xMin + 0.3 + 5, 4 - 0.4 + 5) -- (\xMin - 0.2 + 5, 4 - 0.6 + 6);} % angle
+    
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 5) {{\onslide<20->{\Large $2$}}}; %26
+    \onslide<20->{\draw[dp_table_arrow] (\xMin + 0.3 + 6, 4 - 0.3 + 5) -- (\xMin - 0.3 + 6, 4 - 0.3 + 5);} % horizontal
+
+
+
+    % row 3
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 4) {{\onslide<21->{\Large $1$}}}; %31
+    \onslide<21->{\draw[dp_table_arrow] (\xMin + 0.2 + 1, 4 - 0.3 + 4) -- (\xMin + 0.2 + 1, 4 - 0.5 + 5);} % vertical
+    
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 4) {{\onslide<21->{\Large $1$}}}; %32
+    \onslide<21->{\draw[dp_table_arrow] (\xMin + 0.2 + 2, 4 - 0.3 + 4) -- (\xMin + 0.2 + 2, 4 - 0.5 + 5);} % vertical
+    
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 4) {{\onslide<22->{\Large $2$}}}; %33
+    \onslide<22->{\draw[dp_table_arrow] (\xMin + 0.3 + 3, 4 - 0.4 + 4) -- (\xMin - 0.2 + 3, 4 - 0.6 + 5);} % angle
+    
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 4) {{\onslide<22->{\Large $2$}}}; %34
+    \onslide<22->{\draw[dp_table_arrow] (\xMin + 0.3 + 4, 4 - 0.3 + 4) -- (\xMin - 0.3 + 4, 4 - 0.3 + 4);} % horizontal
+    
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 4) {{\onslide<22->{\Large $2$}}}; %35
+    \onslide<22->{\draw[dp_table_arrow] (\xMin + 0.2 + 5, 4 - 0.3 + 4) -- (\xMin + 0.2 + 5, 4 - 0.5 + 5);} % vertical
+    
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 4) {{\onslide<22->{\Large $2$}}}; %36
+    \onslide<22->{\draw[dp_table_arrow] (\xMin + 0.2 + 6, 4 - 0.3 + 4) -- (\xMin + 0.2 + 6, 4 - 0.5 + 5);} % vertical
+
+
+
+    % row 4
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 3) {{\onslide<23->{\Large $1$}}}; %41
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.3 + 1, 4 - 0.4 + 3) -- (\xMin - 0.2 + 1, 4 - 0.6 + 4);} % angle
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 3) {{\onslide<23->{\Large $1$}}}; %42
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.2 + 2, 4 - 0.3 + 3) -- (\xMin + 0.2 + 2, 4 - 0.5 + 4);} % vertical
+
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 3) {{\onslide<23->{\Large $2$}}}; %43
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.2 + 3, 4 - 0.3 + 3) -- (\xMin + 0.2 + 3, 4 - 0.5 + 4);} % vertical
+
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 3) {{\onslide<23->{\Large $2$}}}; %44
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.2 + 4, 4 - 0.3 + 3) -- (\xMin + 0.2 + 4, 4 - 0.5 + 4);} % vertical
+
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 3) {{\onslide<23->{\Large $3$}}}; %45
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.3 + 5, 4 - 0.4 + 3) -- (\xMin - 0.2 + 5, 4 - 0.6 + 4);} % angle
+    
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 3) {{\onslide<23->{\Large $3$}}}; %46
+    \onslide<23->{\draw[dp_table_arrow] (\xMin + 0.3 + 6, 4 - 0.3 + 3) -- (\xMin - 0.3 + 6, 4 - 0.3 + 3);} % horizontal
+    
+
+     % row 5
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 2) {{\onslide<24->{\Large $1$}}}; %51
+    \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.2 + 1, 4 - 0.3 + 2) -- (\xMin + 0.2 + 1, 4 - 0.5 + 3);} % vertical
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 2) {{\onslide<24->{\Large $2$}}}; %52
+    \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.3 + 2, 4 - 0.4 + 2) -- (\xMin - 0.2 + 2, 4 - 0.6 + 3);} % angle
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 2) {{\onslide<24->{\Large $2$}}}; %53
+     \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.2 + 3, 4 - 0.3 + 2) -- (\xMin + 0.2 + 3, 4 - 0.5 + 3);} % vertical
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 2) {{\onslide<24->{\Large $2$}}}; %54
+     \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.2 + 4, 4 - 0.3 + 2) -- (\xMin + 0.2 + 4, 4 - 0.5 + 3);} % vertical
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 2) {{\onslide<24->{\Large $3$}}}; %55
+     \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.2 + 5, 4 - 0.3 + 2) -- (\xMin + 0.2 + 5, 4 - 0.5 + 3);} % vertical
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 2) {{\onslide<24->{\Large $3$}}}; %56
+     \onslide<24->{\draw[dp_table_arrow] (\xMin + 0.2 + 6, 4 - 0.3 + 2) -- (\xMin + 0.2 + 6, 4 - 0.5 + 3);} % vertical
+
+    % row 6
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 1) {{\onslide<25->{\Large $1$}}}; %61
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.2 + 1, 4 - 0.3 + 1) -- (\xMin + 0.2 + 1, 4 - 0.5 + 2);} % vertical
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 1) {{\onslide<25->{\Large $2$}}}; %62
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.2 + 2, 4 - 0.3 + 1) -- (\xMin + 0.2 + 2, 4 - 0.5 + 2);} % vertical
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 1) {{\onslide<25->{\Large $2$}}}; %63
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.2 + 3, 4 - 0.3 + 1) -- (\xMin + 0.2 + 3, 4 - 0.5 + 2);} % vertical
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 1) {{\onslide<25->{\Large $3$}}}; %64
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.3 + 4, 4 - 0.4 + 1) -- (\xMin - 0.2 + 4, 4 - 0.6 + 2);} % angle
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 1) {{\onslide<25->{\Large $3$}}}; %65
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.2 + 5, 4 - 0.3 + 1) -- (\xMin + 0.2 + 5, 4 - 0.5 + 2);} % vertical
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 1) {{\onslide<25->{\Large $4$}}}; %66
+    \onslide<25->{\draw[dp_table_arrow] (\xMin + 0.3 + 6, 4 - 0.4 + 1) -- (\xMin - 0.2 + 6, 4 - 0.6 + 2);} % angle
+
+    % row 7
+    \node at (\xMin + 0.6 + 1, 4 - 0.6 + 0) {{\onslide<26->{\Large $1$}}}; %71
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.3 + 1, 4 - 0.4 + 0) -- (\xMin - 0.2 + 1, 4 - 0.6 + 1);} % angle
+    \node at (\xMin + 0.6 + 2, 4 - 0.6 + 0) {{\onslide<26->{\Large $2$}}}; %72
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.2 + 2, 4 - 0.3 + 0) -- (\xMin + 0.2 + 2, 4 - 0.5 + 1);} % vertical
+    \node at (\xMin + 0.6 + 3, 4 - 0.6 + 0) {{\onslide<26->{\Large $2$}}}; %73
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.2 + 3, 4 - 0.3 + 0) -- (\xMin + 0.2 + 3, 4 - 0.5 + 1);} % vertical
+    \node at (\xMin + 0.6 + 4, 4 - 0.6 + 0) {{\onslide<26->{\Large $3$}}}; %74
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.2 + 4, 4 - 0.3 + 0) -- (\xMin + 0.2 + 4, 4 - 0.5 + 1);} % vertical
+    \node at (\xMin + 0.6 + 5, 4 - 0.6 + 0) {{\onslide<26->{\Large $4$}}}; %75
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.3 + 5, 4 - 0.4 + 0) -- (\xMin - 0.2 + 5, 4 - 0.6 + 1);} % angle
+    \node at (\xMin + 0.6 + 6, 4 - 0.6 + 0) {{\onslide<26->{\Large $4$}}}; %76
+    \onslide<26->{\draw[dp_table_arrow] (\xMin + 0.2 + 6, 4 - 0.3 + 0) -- (\xMin + 0.2 + 6, 4 - 0.5 + 1);} % vertical
+    
+    \onslide<27>{\draw[thick, red] (\xMin + 6.5, 3.5) circle (0.8); }
+
+
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+
+\column{0.5\textwidth}
+{\fontsize{6pt}{6pt}\selectfont
+If m=0 or n=0\\
+\qquad LCS(m,n) = 0\\~\ \\~\ Else if X[m] = Y[n]\\
+\qquad LCS(m,n) = LCS(m-1, n-1) + 1\\~\ \\~\ Else\\
+\qquad LCS(m,n) = max( LCS(m-1,n), LCS(m, n-1))
+}
+
+
+\end{columns}
+\end{frame}

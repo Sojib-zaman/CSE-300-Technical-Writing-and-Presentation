@@ -1,0 +1,46 @@
+\begin{frame}{Frame Title}
+
+\begin{center}
+    
+
+\tikzset{font=\fontsize{10}{10}\selectfont}
+\begin{adjustbox}{max totalsize={\textwidth}{0.9\textheight}}
+\begin{tikzpicture}[level distance=2cm,
+  level 1/.style={sibling distance=8cm},
+  level 2/.style={sibling distance=5cm},
+  level 3/.style={sibling distance=2.5cm}]
+  \node {LCS(m,n)}
+     child {
+      node {LCS(m-1 , n)}
+      child {
+        node(a0) {LCS(m-2 , n)}       
+      }
+      child {
+        node(a1) {LCS(m-1 , n-1)}
+      }
+    }
+     child {
+      node {LCS(m , n-1)}
+      child {
+        node(a2) {LCS(m-1 , n-1)}
+      }
+      child {
+        node(a3) {LCS(m-1 , n-2)}
+      }
+    };
+\draw[ultra thick , dotted] (a0) -- +(-90:2cm);
+\draw[ultra thick , dotted] (a1) -- +(-90:2cm);
+\draw[ultra thick , dotted] (a2) -- +(-90:2cm);
+\draw[ultra thick , dotted] (a3) -- +(-90:2cm);
+\end{tikzpicture}
+\end{adjustbox}
+\\~\
+\\~\
+\onslide <2> 
+{
+   \textcolor{blue!80}{So the time complexity is $O(2^n)$} 
+}
+
+
+\end{center}
+\end{frame}

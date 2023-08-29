@@ -1,0 +1,160 @@
+\begin{frame}{Recursive Formulation}
+\newcommand*{\xMin}{5}%
+\newcommand*{\xMax}{10}%
+\newcommand*{\yMin}{3}%
+\newcommand*{\yMax}{11}%
+
+\begin{tikzpicture}
+    \node[rectangle] at (0,\xMin) {\large{X}};
+    \node[rectangle] at (0.5,\xMin) {\large{=}};
+    \node[rectangle] at (1,\xMin) {\large{[}};
+    \node[rectangle] at (1.5,\xMin) {\large{1}};
+    \node[rectangle] at (2,\xMin) {\large{2}};
+    \node[rectangle] at (2.5,\xMin) {\large{3}};
+    \node[rectangle] at (3,\xMin) {\large{.}};
+    \node[rectangle] at (3.25,\xMin) {\large{.}};
+    \node[rectangle] at (3.5,\xMin) {\large{.}};
+    \node[rectangle] at (4,\xMin) {\large{m}};
+    \node[rectangle] at (4.5,\xMin) {\large{]}};
+    \onslide<2>{\draw[ultra thick, blue!60] (4-0.25,\xMin-0.25) rectangle (4+0.25,\xMin+0.25) ;}
+    \onslide<2>{\draw[ultra thick, blue!60] (9.25-0.25,\xMin-0.25) rectangle (9.25+0.25,\xMin+0.25) ;}
+    \onslide<3>{\draw [ultra thick, green!60] (1.25,4.75) rectangle ++(2.5,0.5);}
+     \onslide<3>{\draw [ultra thick, green!60] (6.75,4.75) rectangle ++(2.25,0.5);}
+
+    \node[rectangle] at (5.5,\xMin) {\large{Y}};
+    \node[rectangle] at (6,\xMin) {\large{=}};
+    \node[rectangle] at (6.5,\xMin) {\large{[}};
+    \node[rectangle] at (7,\xMin) {\large{1}};
+    \node[rectangle] at (7.5,\xMin) {\large{2}};
+    \node[rectangle] at (8,\xMin) {\large{3}};
+    \node[rectangle] at (8.25,\xMin) {\large{.}};
+    \node[rectangle] at (8.5,\xMin) {\large{.}};
+    \node[rectangle] at (8.75,\xMin) {\large{.}};
+    \node[rectangle] at (9.25,\xMin) {\large{n}};
+    \node[rectangle] at (9.75,\xMin) {\large{]}};
+    \node at (0,4) {};
+    
+\end{tikzpicture}
+    \onslide<2-3>{\large When X[m] == Y[n]}
+\vspace{0.5cm}
+\onslide<3>{$$ LCS(m,n) = LCS(m-1,n-1)+1 $$}
+\end{frame}
+
+\begin{frame}{Recursive Formulation}
+\newcommand*{\xMin}{5}%
+\newcommand*{\xMax}{10}%
+\newcommand*{\yMin}{3}%
+\newcommand*{\yMax}{11}%
+
+\begin{tikzpicture}
+    \node[rectangle] at (0,\xMin) {\large{X}};
+    \node[rectangle] at (0.5,\xMin) {\large{=}};
+    \node[rectangle] at (1,\xMin) {\large{[}};
+    \node[rectangle] at (1.5,\xMin) {\large{1}};
+    \node[rectangle] at (2,\xMin) {\large{2}};
+    \node[rectangle] at (2.5,\xMin) {\large{3}};
+    \node[rectangle] at (3,\xMin) {\large{.}};
+    \node[rectangle] at (3.25,\xMin) {\large{.}};
+    \node[rectangle] at (3.5,\xMin) {\large{.}};
+    \node[rectangle] at (4,\xMin) {\large{m}};
+    \node[rectangle] at (4.5,\xMin) {\large{]}};
+    \onslide<1>{\draw[ultra thick, red!60] (4-0.25,\xMin-0.25) rectangle (4+0.25,\xMin+0.25) ;}
+    \onslide<1>{\draw[ultra thick, red!60] (9.25-0.25,\xMin-0.25) rectangle (9.25+0.25,\xMin+0.25);}
+    \onslide<2>{\draw [ultra thick, green!60] (1.25,4.75) rectangle ++(3,0.5);}
+     \onslide<2>{\draw [ultra thick, green!60] (6.75,4.75) rectangle ++(2.25,0.5);}
+     \onslide<3>{\draw [ultra thick, green!60] (1.25,4.75) rectangle ++(2.5,0.5);}
+     \onslide<3>{\draw [ultra thick, green!60] (6.75,4.75) rectangle ++(2.75,0.5);}
+
+    \node[rectangle] at (5.5,\xMin) {\large{Y}};
+    \node[rectangle] at (6,\xMin) {\large{=}};
+    \node[rectangle] at (6.5,\xMin) {\large{[}};
+    \node[rectangle] at (7,\xMin) {\large{1}};
+    \node[rectangle] at (7.5,\xMin) {\large{2}};
+    \node[rectangle] at (8,\xMin) {\large{3}};
+    \node[rectangle] at (8.25,\xMin) {\large{.}};
+    \node[rectangle] at (8.5,\xMin) {\large{.}};
+    \node[rectangle] at (8.75,\xMin) {\large{.}};
+    \node[rectangle] at (9.25,\xMin) {\large{n}};
+    \node[rectangle] at (9.75,\xMin) {\large{]}};
+    \node at (0,4) {};
+\end{tikzpicture}
+    \onslide<1->{\large When X[m] != Y[n]}
+\vspace{0.5cm}
+\onslide<2->{$$ LCS(m,n) = max\{LCS(m,n-1),\onslide<3>{LCS(m-1,n)\} }$$}
+\end{frame}
+
+\begin{frame}{Recursive Formulation}
+\newcommand*{\xMin}{5}%
+\newcommand*{\xMax}{10}%
+\newcommand*{\yMin}{3}%
+\newcommand*{\yMax}{11}%
+
+\begin{tikzpicture}
+    \node[rectangle] at (0,\xMin) {\large{X}};
+    \node[rectangle] at (0.5,\xMin) {\large{=}};
+    \node[rectangle] at (1,\xMin) {\large{[}};
+    \node[rectangle] at (1.5,\xMin) {\large{1}};
+    \node[rectangle] at (2,\xMin) {\large{2}};
+    \node[rectangle] at (2.5,\xMin) {\large{3}};
+    \node[rectangle] at (3,\xMin) {\large{.}};
+    \node[rectangle] at (3.25,\xMin) {\large{.}};
+    \node[rectangle] at (3.5,\xMin) {\large{.}};
+    \node[rectangle] at (4,\xMin) {\large{m}};
+    \node[rectangle] at (4.5,\xMin) {\large{]}};
+
+
+    \node[rectangle] at (5.5,\xMin) {\large{Y}};
+    \node[rectangle] at (6,\xMin) {\large{=}};
+    \node[rectangle] at (6.5,\xMin) {\large{[}};
+    \node[rectangle] at (7,\xMin) {\large{1}};
+    \node[rectangle] at (7.5,\xMin) {\large{2}};
+    \node[rectangle] at (8,\xMin) {\large{3}};
+    \node[rectangle] at (8.25,\xMin) {\large{.}};
+    \node[rectangle] at (8.5,\xMin) {\large{.}};
+    \node[rectangle] at (8.75,\xMin) {\large{.}};
+    \node[rectangle] at (9.25,\xMin) {\large{n}};
+    \node[rectangle] at (9.75,\xMin) {\large{]}};
+    \node at (0,4) {};
+\end{tikzpicture}
+    \onslide<1>{\large The recursion solution:}
+    \\
+
+\small{
+\[  LCS(m,n) = 
+    \begin{cases} 
+      LCS(m-1 , n-1)+1 & X[m] == Y[n] \\
+      max\{LCS(m-1 , n),{LCS(m,n-1)\} } & X[m] != Y[n] 
+   \end{cases}
+\]}
+
+
+\end{frame}
+
+\begin{frame}[label=conclusion, standout]
+    \begin{center}
+    \LARGE What about the base case?
+    \end{center}
+\end{frame}
+
+\begin{frame}{Recursive Formulation}
+    \begin{center}
+      \large If m == 0 then LCS(m,n) = 0\\ 
+        \vspace{0.5cm}
+      \large If n == 0 then LCS(m,n) = 0\\ 
+    \end{center}
+\end{frame}
+
+\begin{frame}{Recursive Formulation}
+    \large The final recursion solution:
+       
+        \small{
+            \[  LCS(m,n) = 
+                \begin{cases}
+                  0 & m == 0 || n == 0\\
+                  LCS(m-1 , n-1)+1 & X[m] == Y[n] \\
+                  max\{LCS(m-1 ,n),LCS(m,n-1)\}  & X[m] != Y[n]
+               \end{cases}
+            \]
+        }
+\end{frame}
+
